@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FormRow } from "../../components";
 import Wrapper from "../../assets/wrappers/DashboardFormPage";
 import { toast } from "react-toastify";
+import { updateUser } from "../../features/user/userSlice";
 
 const Profile = () => {
   const { isLoading, user } = useSelector((store) => store.user);
@@ -28,6 +29,7 @@ const Profile = () => {
       toast.error("Please fill out all the fields");
       return;
     }
+    dispatch(updateUser(userData));
   };
 
   return (
@@ -38,29 +40,35 @@ const Profile = () => {
           <FormRow
             type="text"
             name="name"
+            labelText="name"
             value={userData.name}
             handleChange={handleChange}
           />
           <FormRow
             type="text"
             name="lastName"
+            labelText="last name"
             value={userData.lastName}
             handleChange={handleChange}
           />
           <FormRow
             type="email"
             name="email"
+            labelText="email"
             value={userData.email}
             handleChange={handleChange}
           />
           <FormRow
             type="text"
             name="location"
+            labelText="location"
             value={userData.location}
             handleChange={handleChange}
           />
+          <button type="submit" disabled={isLoading} className="btn btn-block">
+            {isLoading ? "Please Wait ..." : "save changes"}
+          </button>
         </div>
-        <button type="button">save changes</button>
       </form>
     </Wrapper>
   );
