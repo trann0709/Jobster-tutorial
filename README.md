@@ -2465,7 +2465,27 @@ if (isEditing) {
 
 #### 69) Job Thunk
 
+In userslice, we created the functions and then we returned from the callback function.
+
+export const registerUserThunk = async (url, user, thunkAPI) => {
+try {
+const resp = await customFetch.post(url, user);
+return resp.data;
+} catch (error) {
+return thunkAPI.rejectWithValue(error.response.data.msg);
+}
+};
+
+export const registerUser = createAsyncThunk(
+"user/registerUser",
+async (user, thunkAPI) => {
+return registerUserThunk("/auth/register", user, thunkAPI);
+}
+);
+
 - features/job/jobThunk.js
+
+Move the entire function
 
 ```js
 import customFetch from "../../utils/axios";

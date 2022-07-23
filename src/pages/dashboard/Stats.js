@@ -13,7 +13,8 @@ const Stats = () => {
   );
 
   if (isLoading) {
-    return <Loading center />;
+    return;
+    // return <Loading center />;
   }
 
   return <div>Stats</div>;
