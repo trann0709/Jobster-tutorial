@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { showStats } from "../../features/allJobs/allJobsSlice";
+import { Loading, StatsContainer, ChartsContainer } from "../../components";
 
 const Stats = () => {
   const dispatch = useDispatch();
@@ -13,11 +14,15 @@ const Stats = () => {
   );
 
   if (isLoading) {
-    return;
-    // return <Loading center />;
+    return <Loading center />;
   }
 
-  return <div>Stats</div>;
+  return (
+    <>
+      <StatsContainer />
+      {monthlyApplications.length > 0 && <ChartsContainer />}
+    </>
+  );
 };
 
 export default Stats;
